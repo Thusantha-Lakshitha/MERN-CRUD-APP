@@ -2,6 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 
+// Connect to MongoDB and show the database/collections.
 async function showDatabase() {
 	try {
 		if (!mongoUri) {
@@ -11,11 +12,11 @@ async function showDatabase() {
 		await mongoose.connect(mongoUri);
 		console.log('✅ Connected to MongoDB');
 
-		// Get database name
+		// Display the database name
 		const dbName = mongoose.connection.db.getName();
 		console.log(`\n📊 Database Name: ${dbName}`);
 
-		// Get all collections
+		// Display all collections
 		const collections = await mongoose.connection.db.listCollections().toArray();
 		console.log(`\n📋 Collections (${collections.length}):`);
 		
