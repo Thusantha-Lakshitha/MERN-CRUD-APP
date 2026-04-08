@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const routes = require('./Route/userroute');
 
 const app = express();
+const cors = require('cors');
 const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 const localMongoUri = process.env.LOCAL_MONGODB_URI || 'mongodb://127.0.0.1:27017/project1';
 const port = process.env.PORT || process.env.SERVER_PORT || 5000;
@@ -18,6 +19,7 @@ if (!mongoUri) {
 // Enable stricter Mongoose query parsing and JSON request bodies.
 mongoose.set('strictQuery', true);
 app.use(express.json());
+app.use(cors());
 app.use(express.text({ type: 'text/plain' }));
 app.use(express.urlencoded({ extended: true }));
 
